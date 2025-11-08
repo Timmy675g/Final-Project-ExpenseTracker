@@ -1,0 +1,82 @@
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: justify;
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: lightgreen;
+    border-radius: 10px;
+}
+
+.current-balance {
+    background-color: #349121;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.current-balance h2 {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.current-balance p {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.input-box {
+    width: 250px;
+    padding: 13px;
+    border: solid lightgray;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.1s;
+}
+
+.btn {
+    padding: 10px;
+    background-color: #4ed134;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background-color: #48b033;
+}
+
+.money-list {
+    list-style-type: none;
+    padding: 0;
+    color: gray;
+}
+
+.money-list li {
+    padding: 8px;
+    border-bottom: solid white;
+}
