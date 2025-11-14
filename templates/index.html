@@ -17,19 +17,66 @@
             <h2>Current Balance :</h2>
             <p>${{Balance}}</p>
         </div>
-        
+
+        {% if warning %}
+            <div class="warning-message warning-{{ warning.type }}">
+                {{ warning.message }}
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+
         <form action="/moneh-enter" method="POST" class="enter-moneh">
-            <input type="text" name="title" placeholder="Enter Amount Of Money" class="input-box">
+            <div class="form-row">
+                <select name="type" class="type-select">
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                </select>
+                <input type="text" name="amount" placeholder="Enter Amount" class="input-box">
+            </div>
+            
+            <select name="category" class="category-select">
+                <option value="">Category</option>
+                <option value="Food">🍔 Food</option>
+                <option value="Transport">🚗 Transport</option>
+                <option value="Shopping">🛍️ Shopping</option>
+                <option value="Bills">💡 Bills</option>
+                <option value="Salary">💰 Salary</option>
+                <option value="Bonus"> 💲 Bonus</option>
+                <option value="Invest"> 📈 Investments</option>
+                <option value="Gift"> 🎁 Gift</option>
+                <option value="Other">📌 Other</option>
+            </select>
+            
+            <input type="text" name="description" placeholder="Add a note (optional)" class="input-box description-input">
             <button type="submit" class="btn">Submit Amount</button>
         </form>
     
-    <ul class="money-list">
-        {% for entry in entries %}
-            <li>{{entry}}</li>
-        {%else%}
-            <li>No Money List Yet!</li>
-        {%endfor%}
-    </ul>
+        <h3 style="margin-top: 30px;">Your Transactions</h3>
+        <ul class="money-list">
+            {% for entry in entries %}
+                <li class="{% if entry.type == 'income' %}income-entry{% else %}expense-entry{% endif %}">
+                    <div class="entry-info">
+                        <div>
+                            <span class="entry-description">{{ entry.description }}</span>
+                            {% if entry.category %}
+                                <span class="entry-category">{{ entry.category }}</span>
+                            {% endif %}
+                        </div>
+                        <span class="entry-amount">
+                            {% if entry.amount > 0 %}+{% endif %}${{ entry.amount }}
+                        </span>
+                    </div>
+                    <form action="/delete/{{ entry.id }}" method="POST" style="display: inline;">
+                        <button type="submit" class="delete-btn">×</button>
+                    </form>
+                </li>
+            {%else%}
+                <li>No transactions yet!</li>
+            {%endfor%}
+        </ul>
     </div>
 </body>
 </html>

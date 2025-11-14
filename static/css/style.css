@@ -1,82 +1,322 @@
 h1 {
     text-align: center;
+    color: #2c3e50;
+    margin-bottom: 10px;
 }
 
 p {
     text-align: center;
+    color: #7f8c8d;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    align-items: justify;
-    width: 80%;
-    height: 80%;
-    margin: auto;
-    padding: 20px;
-    background-color: lightgreen;
-    border-radius: 10px;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .current-balance {
-    background-color: #349121;
+    background-color: #27ae60;
     color: white;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
 }
 
 .current-balance h2 {
-    margin: 10px;
-    font-size: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: normal;
+    opacity: 0.9;
 }
 
 .current-balance p {
-    font-size: 30px;
+    font-size: 36px;
     font-weight: bold;
     margin: 0;
+    color: white;
 }
 
-.form {
+.error-message {
+    background-color: #fee2e2;
+    color: #dc2626;
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #dc2626;
+    font-size: 15px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.warning-message {
+    padding: 14px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid;
+    font-size: 15px;
+    font-weight: 500;
+    animation: slideDown 0.3s ease;
+}
+
+.warning-danger {
+    background-color: #fee2e2;
+    color: #dc2626;
+    border-color: #dc2626;
+}
+
+.warning-critical {
+    background-color: #fef3c7;
+    color: #d97706;
+    border-color: #d97706;
+}
+
+.warning-warning {
+    background-color: #fef9e7;
+    color: #f39c12;
+    border-color: #f39c12;
+}
+
+.enter-moneh {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
     gap: 10px;
     margin-top: 20px;
 }
 
-.input-box {
-    width: 250px;
-    padding: 13px;
-    border: solid lightgray;
+.form-row {
+    display: flex;
+    gap: 10px;
+}
+
+.type-select {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 15px;
     outline: none;
-    transition: 0.1s;
+    background-color: white;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.type-select:focus {
+    border-color: #27ae60;
+}
+
+.input-box {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+}
+
+.input-box:focus {
+    border-color: #27ae60;
+}
+
+.description-input {
+    width: 100%;
 }
 
 .btn {
-    padding: 10px;
-    background-color: #4ed134;
+    padding: 12px 24px;
+    background-color: #27ae60;
     color: white;
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: 0.2s;
+    font-size: 15px;
 }
 
 .btn:hover {
-    background-color: #48b033;
+    background-color: #229954;
 }
 
 .money-list {
     list-style-type: none;
     padding: 0;
-    color: gray;
+    margin-top: 20px;
 }
 
 .money-list li {
-    padding: 8px;
-    border-bottom: solid white;
+    padding: 12px;
+    border-bottom: 1px solid #ecf0f1;
+    color: #34495e;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.money-list li:last-child {
+    border-bottom: none;
+}
+
+.entry-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+}
+
+.entry-description {
+    font-weight: 500;
+}
+
+.entry-amount {
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.income-entry .entry-amount {
+    color: #27ae60;
+}
+
+.expense-entry .entry-amount {
+    color: #e74c3c;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.category-select {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.category-select:focus {
+    border-color: #27ae60;
+}
+
+.entry-category {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-left: 8px;
+}
+
+.category-select {
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.category-select:focus {
+    border-color: #27ae60;
+}
+
+.entry-main {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.entry-category {
+    font-size: 12px;
+    color: #7f8c8d;
+    background-color: #ecf0f1;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.category-breakdown {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.category-breakdown h3 {
+    margin: 0 0 15px 0;
+    color: #2c3e50;
+}
+
+.category-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 8px;
+    border-left: 4px solid #ddd;
+}
+
+.stat-income {
+    border-left-color: #27ae60;
+}
+
+.stat-expense {
+    border-left-color: #e74c3c;
+}
+
+.category-name {
+    font-weight: 500;
+    color: #34495e;
+}
+
+.category-amount {
+    font-weight: bold;
+}
+
+.stat-income .category-amount {
+    color: #27ae60;
+}
+
+.stat-expense .category-amount {
+    color: #e74c3c;
 }
