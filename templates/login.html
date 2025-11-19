@@ -1,0 +1,33 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginregister.css') }}">
+    <title>Login — Money Tracker</title>
+</head>
+<body>
+    <div class="container auth-container">
+        <h1>Login</h1>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% if error %}
+            <div class="error-message">{{ error }}</div>
+        {% endif %}
+
+        <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+            <input type="text" name="username" placeholder="Username" class="input-box" required>
+            <input type="password" name="password" placeholder="Password" class="input-box" required>
+
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <p class="auth-switch">
+            Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a>
+        </p>
+    </div>
+</body>
+</html>
