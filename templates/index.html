@@ -4,18 +4,33 @@
     name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
     >
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../static/css/style.css">
-  <link rel="icon" href="static/Assets/Icons/favicon.png">
-  <title>Money Tracker Website</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='Assets/Icons/favicon.png') }}">
+    <title>MoneyTracker Website</title>
 </head>
 <body>
     <div class="container">
-        <h1>Money Tracker Website</h1>
+
+        <div class="header">
+            <h1>MoneyTracker</h1>
+            <div class="user-info">
+                <span>Welcome, {{ current_user.username }}!</span>
+                <a href="{{ url_for('auth.logout') }}" class="btn-logout">Logout</a>
+            </div>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
         <div class="current-balance">
-            <h2>Current Balance :</h2>
-            <p>${{Balance}}</p>
+            <h2>Current Balance:</h2>
+            <p class="{% if Balance < 0 %}negative{% endif %}">${{ "%.2f"|format(Balance) }}</p>
         </div>
 
         {% if warning %}
@@ -28,13 +43,13 @@
             <div class="error-message">{{ error }}</div>
         {% endif %}
 
-        <form action="/moneh-enter" method="POST" class="enter-moneh">
+        <form action="{{ url_for('submit') }}" method="POST" class="enter-moneh">
             <div class="form-row">
                 <select name="type" class="type-select">
                     <option value="income">Income</option>
                     <option value="expense">Expense</option>
                 </select>
-                <input type="text" name="amount" placeholder="Enter Amount" class="input-box">
+                <input type="number" step="0.01" name="amount" placeholder="Enter Amount" class="input-box" required>
             </div>
             
             <select name="category" class="category-select">
@@ -44,9 +59,9 @@
                 <option value="Shopping">🛍️ Shopping</option>
                 <option value="Bills">💡 Bills</option>
                 <option value="Salary">💰 Salary</option>
-                <option value="Bonus"> 💲 Bonus</option>
-                <option value="Invest"> 📈 Investments</option>
-                <option value="Gift"> 🎁 Gift</option>
+                <option value="Bonus">💲 Bonus</option>
+                <option value="Invest">📈 Investments</option>
+                <option value="Gift">🎁 Gift</option>
                 <option value="Other">📌 Other</option>
             </select>
             
@@ -66,16 +81,16 @@
                             {% endif %}
                         </div>
                         <span class="entry-amount">
-                            {% if entry.amount > 0 %}+{% endif %}${{ entry.amount }}
+                            {% if entry.amount > 0 %}+{% endif %}${{ "%.2f"|format(entry.amount|abs) }}
                         </span>
                     </div>
-                    <form action="/delete/{{ entry.id }}" method="POST" style="display: inline;">
-                        <button type="submit" class="delete-btn">×</button>
+                    <form action="{{ url_for('delete_entry', entry_id=entry.id) }}" method="POST" style="display: inline;">
+                        <button type="submit" class="delete-btn" onclick="return confirm('Delete this entry?')">×</button>
                     </form>
                 </li>
-            {%else%}
-                <li>No transactions yet!</li>
-            {%endfor%}
+            {% else %}
+                <li class="no-transactions">No transactions yet! Add your first entry above.</li>
+            {% endfor %}
         </ul>
     </div>
 </body>
