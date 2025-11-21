@@ -46,4 +46,4 @@ With continuous feedback and updates, it can grow into a full featured personal 
 Follow these steps to get the MoneyTracker running locally:
 
 ```bash
-git clone [https://github.com/Timmy675g/Final-Project-ExpenseTracker]
+git clone [https://github.com/Timmy675g/Final-Project-MoneyTracker]
